@@ -1,7 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "../components/Layout";
-
-// Sahifalarni import qilish
 import Home from "../pages/Home";
 import About from "../pages/About";
 import ContractProduct from "../pages/ContractProduct";

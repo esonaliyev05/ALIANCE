@@ -1,31 +1,42 @@
 import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+
+  const isHome = location.pathname === "/";
 
   const navLinkStyle = ({ isActive }) =>
     `text-[12px] font-normal whitespace-nowrap no-underline transition-colors duration-200 max-[1100px]:text-[11px] ${
-      isActive ? "text-[#5289df] font-medium" : "text-white hover:text-[#5289df]"
+      isActive
+        ? "text-[#5289df] font-medium"
+        : isHome
+        ? "text-white hover:text-[#5289df]"
+        : "text-[#333] hover:text-[#5289df]"
     }`;
 
   return (
     <>
-      {/* Fixed va shaffof (transparent) Navbar */}
-      <header className="fixed top-0 left-0 z-[1000] w-full h-[66px] bg-transparent border-b border-white/10 text-white">
+      <header
+        className={`fixed top-0 left-0 z-[1000] w-full h-[66px] transition-colors duration-200 ${
+          isHome
+            ? "bg-transparent border-b border-white/10 text-white"
+            : "bg-white border-b border-[#eeeeee] text-[#333]"
+        }`}
+      >
         <div className="w-full max-w-[1250px] h-full mx-auto flex items-center justify-between px-4 md:px-0">
           <Link
             to="/"
             className="w-[150px] h-full flex items-center shrink-0 max-[768px]:w-auto"
           >
             <img
-              src="src/assets/logo.png"
+              src={isHome ? "src/assets/logo.png" : "src/assets/logo-dark.png"}
               alt="Aliance Production"
               className="block w-[130px] h-auto max-[768px]:w-[115px]"
             />
           </Link>
 
-          {/* DESKTOP MENU */}
           <nav
             className="
               flex-1
@@ -61,16 +72,14 @@ const Navbar = () => {
             </NavLink>
           </nav>
 
-          {/* PHONE */}
           <a
             href="tel:+74996861014"
-            className="
+            className={`
               flex
               items-center
               gap-[7px]
               ml-[25px]
 
-              text-white
               text-[12px]
               font-medium
               whitespace-nowrap
@@ -80,13 +89,13 @@ const Navbar = () => {
               max-[1100px]:text-[11px]
 
               max-[768px]:hidden
-            "
+              ${isHome ? "text-white" : "text-[#333]"}
+            `}
           >
             <PhoneIcon />
             <span>+7 (499) 686-10-14</span>
           </a>
 
-          {/* CONSULTATION BUTTON */}
           <Link
             to="/contact"
             className="
@@ -120,12 +129,11 @@ const Navbar = () => {
             Получить консультацию
           </Link>
 
-          {/* MOBILE BUTTON */}
           <button
             type="button"
             onClick={() => setIsOpen(true)}
             aria-label="Открыть меню"
-            className="
+            className={`
               hidden
 
               max-[768px]:flex
@@ -138,23 +146,24 @@ const Navbar = () => {
 
               border-0
               border-l
-              border-white/20
 
               bg-transparent
 
               cursor-pointer
 
-              text-white
-
               ml-auto
-            "
+              ${
+                isHome
+                  ? "border-white/20 text-white"
+                  : "border-[#eeeeee] text-[#333]"
+              }
+            `}
           >
             <MenuIcon />
           </button>
         </div>
       </header>
 
-      {/* MOBILE MENU (Sidebar) */}
       <aside
         className={`
           fixed
@@ -191,7 +200,6 @@ const Navbar = () => {
             border-[#eeeeee]
           "
         >
-          {/* CLOSE BUTTON */}
           <button
             type="button"
             onClick={() => setIsOpen(false)}
@@ -216,7 +224,6 @@ const Navbar = () => {
             <CloseIcon />
           </button>
 
-          {/* MOBILE LOGO */}
           <Link
             to="/"
             onClick={() => setIsOpen(false)}
@@ -236,7 +243,6 @@ const Navbar = () => {
             />
           </Link>
 
-          {/* MOBILE PHONE */}
           <a
             href="tel:+74996861014"
             className="
@@ -257,7 +263,6 @@ const Navbar = () => {
           </a>
         </div>
 
-        {/* MOBILE CONTENT */}
         <nav className="px-6 pt-5 pb-10">
           <Link
             to="/about"
