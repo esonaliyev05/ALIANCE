@@ -1,17 +1,35 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
 
   const isHome = location.pathname === "/";
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY >= 750) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const isTransparent = isHome && !isScrolled;
 
   const navLinkStyle = ({ isActive }) =>
     `text-[12px] font-normal whitespace-nowrap no-underline transition-colors duration-200 max-[1100px]:text-[11px] ${
       isActive
         ? "text-[#5289df] font-medium"
-        : isHome
+        : isTransparent
         ? "text-white hover:text-[#5289df]"
         : "text-[#333] hover:text-[#5289df]"
     }`;
@@ -19,10 +37,10 @@ const Navbar = () => {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 z-[1000] w-full h-[66px] transition-colors duration-200 ${
-          isHome
+        className={`fixed top-0 left-0 z-[1000] w-full h-[66px] transition-all duration-300 ${
+          isTransparent
             ? "bg-transparent border-b border-white/10 text-white"
-            : "bg-white border-b border-[#eeeeee] text-[#333]"
+            : "bg-white border-b border-[#eeeeee] text-[#333] shadow-sm"
         }`}
       >
         <div className="w-full max-w-[1250px] h-full mx-auto flex items-center justify-between px-4 md:px-0">
@@ -31,7 +49,7 @@ const Navbar = () => {
             className="w-[150px] h-full flex items-center shrink-0 max-[768px]:w-auto"
           >
             <img
-              src={isHome ? "src/assets/logo.png" : "src/assets/logo-dark.png"}
+              src={isTransparent ? "src/assets/logo.png" : "src/assets/logo-dark.png"}
               alt="Aliance Production"
               className="block w-[130px] h-auto max-[768px]:w-[115px]"
             />
@@ -89,7 +107,7 @@ const Navbar = () => {
               max-[1100px]:text-[11px]
 
               max-[768px]:hidden
-              ${isHome ? "text-white" : "text-[#333]"}
+              ${isTransparent ? "text-white" : "text-[#333]"}
             `}
           >
             <PhoneIcon />
@@ -153,7 +171,7 @@ const Navbar = () => {
 
               ml-auto
               ${
-                isHome
+                isTransparent
                   ? "border-white/20 text-white"
                   : "border-[#eeeeee] text-[#333]"
               }

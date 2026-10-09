@@ -10,6 +10,7 @@ import Blog from "../pages/Blog";
 import BlogMore from "../components/BlogMore";
 import Contact from "../pages/Contact";
 import PrivacyPolicy from "../pages/PrivacyPolicy";
+import NotFound from "../pages/NotFound";
 
 const router = createBrowserRouter([
   {
@@ -60,6 +61,14 @@ const router = createBrowserRouter([
         path: "politics",
         element: <PrivacyPolicy />,
       },
+
+    {
+      path: "*", // Barcha mos kelmagan yo'llar uchun
+      element: <NotFound />, 
+
+    }
+
+
     ],
   },
 ]);
