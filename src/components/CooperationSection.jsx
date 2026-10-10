@@ -22,11 +22,9 @@ const CooperationSection = () => {
   };
 
   return (
-    // Seksiyaga min-h-[300px] berildi va overflow visible qilindi
     <section className="w-full bg-[#F4F6F8] relative min-h-[300px] py-16 lg:py-20 px-4 sm:px-6 lg:px-12 mt-32 overflow-visible">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 relative overflow-visible">
         
-        {/* Rasm konteyneri: balandligi 300px, rasm max 350px */}
         <div className="w-full lg:w-1/2 flex justify-center lg:justify-start relative min-h-[300px] overflow-visible">
           <img
             src="src/assets/home-imags/__400 1.png"
