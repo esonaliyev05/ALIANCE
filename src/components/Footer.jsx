@@ -4,9 +4,7 @@ import { MapPin, Mail } from "lucide-react";
 const Footer = () => {
   return (
     <footer className="w-full bg-[#f9f9f9] text-[#292d32] font-sans border-t border-[#e8e8e8]">
-      {/* Yuqori qism: Logo va Kontaktlar */}
       <div className="max-w-[1250px] mx-auto px-4 py-8 flex flex-wrap items-center justify-between gap-6 border-b border-[#eeeeee]">
-        {/* Logo */}
         <a href="/" className="flex items-center gap-3 no-underline">
           <img
             src="src/assets/logo-dark.png"
@@ -15,7 +13,6 @@ const Footer = () => {
           />
         </a>
 
-        {/* Telefon raqami */}
         <a
           href="tel:+74996861014"
           className="text-[26px] md:text-[32px] font-bold text-[#292d32] no-underline hover:text-[#5289df] transition-colors"
@@ -23,7 +20,6 @@ const Footer = () => {
           +7 (499) 686-10-14
         </a>
 
-        {/* Manzil */}
         <div className="flex items-center gap-2 text-xs text-[#292d32]">
           <MapPin className="w-4 h-4 text-[#5289df] shrink-0" />
           <span>г. Москва, Холодильный пер. 4к1с8</span>
