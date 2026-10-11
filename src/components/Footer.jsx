@@ -1,6 +1,7 @@
 import React from "react";
 import { MapPin, Mail } from "lucide-react";
 
+
 const Footer = () => {
   return (
     <footer className="w-full bg-[#f9f9f9] text-[#292d32] font-sans border-t border-[#e8e8e8]">
